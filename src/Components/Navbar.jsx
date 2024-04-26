@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
-// import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import '../App.css'
 import logo from '../assets/logo-no-background.svg';
 
