@@ -38,6 +38,7 @@ function App() {
   const [showModal, setShowModal] = useState(false); // Control modal visibility
 
   const handleCreatePost = (newPost) => {
+    console.log("handleCreatePost called with:", newPost);
     const now = new Date();
     const formattedDate = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
 
@@ -66,6 +67,9 @@ function App() {
       container.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  console.log('Rendering App');
+  console.log("handleCreatePost function:", handleCreatePost);
 
   return (
     <div>
@@ -97,10 +101,7 @@ function App() {
           <div className="backdrop"></div>
           <div className="modal show d-block" tabIndex="-1">
             <div className="modal-dialog modal-dialog-centered">
-              <CreatePost 
-                addPost={handleCreatePost} // Pass the correct function
-                onClose={() => setShowModal(false)} // Pass the onClose handler
-              />
+            <CreatePost addPost={handleCreatePost} onClose={() => setShowModal(false)} />
             </div>
           </div>
         </>
