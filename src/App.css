@@ -146,6 +146,10 @@
   margin-top: 1rem;
 }
 
+.image-placeholder {
+  display: none;
+}
+
 /* Texts */
 .custom-color {
   color: black !important;

@@ -12,7 +12,13 @@ function Card({ imgSrc, title, text, lastUpdated, style, upvotes, onClick, onUpv
 
     return (
         <div className="card fixed-size-card" style={style} onClick={onClick}>
-            <img src={imgSrc} className="card-img-top" alt={title} />
+            {imgSrc && (
+                <img src={imgSrc} className="card-img-top" alt={title} />
+            )}
+            {!imgSrc && (
+                <div className="image-placeholder">Image Not Available</div>
+            )}
+
             <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 {/* <p className="card-text">{text}</p> */}
