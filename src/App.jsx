@@ -1,12 +1,39 @@
+import React, { useEffect, useRef } from 'react';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Card from './Components/Card';
 import img1 from './assets/img1.png';
+import img2 from './assets/img2.jpg';
+import img3 from './assets/img3.jpg';
+import img4 from './assets/img4.jpg';
 import './App.css'
 
 function App() {
+
+  const scrollContainerRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollContainer = scrollContainerRef.current;
+      const center = scrollContainer.getBoundingClientRect().width / 2;
+
+      Array.from(scrollContainer.children).forEach(card => {
+        const cardCenter = card.getBoundingClientRect().left + card.getBoundingClientRect().width / 2;
+        const distanceFromCenter = Math.abs(center - cardCenter);
+        const scale = Math.max(1 - distanceFromCenter / center, 0.7); // Scales down to 50%
+        card.style.transform = `scale(${scale})`;
+      });
+    };
+
+    const container = scrollContainerRef.current;
+    container.addEventListener('scroll', handleScroll);
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div>
@@ -20,27 +47,27 @@ function App() {
         <input classNameName="form-control" type="file" id="formFileMultiple" multiple></input>
       </div> */}
 
-<div className="container mt-5">
+      <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <div className="horizontal-scroll">
+            <div className="horizontal-scroll" ref={scrollContainerRef}>
               <Card 
-                imgSrc={img1}
-                title="HOPE, 2023"
-                text="Monika Marchewka, a Polish artist and animator born in 1988, graduated from the Krakow Academy of Fine Arts with a major in painting. She is good at depicting a surreal world with a series of hazy and dreamy images such as pearls, tears and haloes."
-                lastUpdated="Last updated 3 mins ago"
+                imgSrc={img4}
+                title="You Are My meow meow"
+                text="Illustrator Jaznaka paints cute cats and all the sweet things in life."
+                lastUpdated="Last updated 45 mins ago"
               />
               <Card 
-                imgSrc={img1}
-                title="HOPE, 2023"
-                text="Monika Marchewka, a Polish artist and animator born in 1988, graduated from the Krakow Academy of Fine Arts with a major in painting. She is good at depicting a surreal world with a series of hazy and dreamy images such as pearls, tears and haloes."
-                lastUpdated="Last updated 3 mins ago"
+                imgSrc={img2}
+                title="You Are My meow meow"
+                text="Illustrator Jaznaka paints cute cats and all the sweet things in life."
+                lastUpdated="Last updated 45 mins ago"
               />
               <Card 
-                imgSrc={img1}
-                title="HOPE, 2023"
-                text="Monika Marchewka, a Polish artist and animator born in 1988, graduated from the Krakow Academy of Fine Arts with a major in painting. She is good at depicting a surreal world with a series of hazy and dreamy images such as pearls, tears and haloes."
-                lastUpdated="Last updated 3 mins ago"
+                imgSrc={img3}
+                title="You Are My meow meow"
+                text="Illustrator Jaznaka paints cute cats and all the sweet things in life."
+                lastUpdated="Last updated 45 mins ago"
               />
             </div>
           </div>

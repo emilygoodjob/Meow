@@ -6,7 +6,7 @@ import logo from '../assets/logo-no-background.svg';
 
 function Navbar() {
   const navbarRef = useRef(null);
-  const [color, setColor] = useState('#EEF1F5'); // Default color
+  const [color, setColor] = useState('#F4FAFC'); // Default color
 
   const handleChange = (event) => {
       setColor(event.target.value);
