@@ -86,6 +86,7 @@ function App() {
                   title={card.title}
                   text={card.text}
                   lastUpdated={card.lastUpdated}
+                  index={index}
                 />
               ))}
             </div>
@@ -107,16 +108,16 @@ function App() {
         </>
       )}
 
-        {showSuccessAlert && (
-          <div className="alert alert-success success-alert d-flex align-items-center" role="alert">
-            <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-              <use xlinkHref="#check-circle-fill" /> 
-            </svg>
-            <div>
-              Successfully created post!
-            </div>
+      {showSuccessAlert && (
+        <div className="alert alert-success success-alert d-flex align-items-center" role="alert">
+          <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+            <use xlinkHref="#check-circle-fill" /> 
+          </svg>
+          <div>
+            Successfully created post!
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 function CreatePost({ addPost, onClose }) {
-    console.log("Received addPost:", addPost);
     // State to hold the form data
     const [post, setPost] = useState({
         title: '',
