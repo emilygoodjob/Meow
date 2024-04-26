@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import logo from '../assets/logo-no-background.svg';
 import CreatePost from './CreatePost';
 import '../App.css';
 
-function Navbar({ showModal, toggleModal }) {
+function Navbar({ showModal, toggleModal, sortPosts }) {
     const navbarRef = useRef(null);
     const [color, setColor] = useState('#F4FAFC'); // Default color
 
@@ -57,8 +57,8 @@ function Navbar({ showModal, toggleModal }) {
                                     Sorting
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-center">
-                                    <li><a className="dropdown-item" href="#">Created Time</a></li>
-                                    <li><a className="dropdown-item" href="#">Upvote Counts</a></li>
+                                    <li><button className="dropdown-item" onClick={() => sortPosts('createdTime')}>Latest</button></li>
+                                    <li><button className="dropdown-item" onClick={() => sortPosts('upvoteCount')}>Popular (Upvotes)</button></li>
                                 </ul>
                             </li>
                         </ul>

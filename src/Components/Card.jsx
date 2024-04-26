@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import heart from '../assets/heart.png';
 
 function Card({ imgSrc, title, text, lastUpdated, style, upvotes, onClick, onUpvote}) {
     // Initialize upvotes based on the index
     const [upvotesCount, setUpvotesCount] = useState(upvotes);
+
+    // Update upvotesCount when upvotes prop changes
+    useEffect(() => {
+        setUpvotesCount(upvotes);
+    }, [upvotes]);
 
     const handleUpvote = () => {
         setUpvotesCount(prevUpvotes => prevUpvotes + 1);
@@ -30,7 +35,7 @@ function Card({ imgSrc, title, text, lastUpdated, style, upvotes, onClick, onUpv
                     {/* Upvote button with heart image */}
                     <button className="btn" onClick={(e) => { e.stopPropagation(); handleUpvote(); }}>
                         <img src={heart} alt="Heart" style={{ width: '20px', marginRight: '5px' }} />
-                        Upvote ({upvotesCount})
+                        ({upvotesCount})
                     </button>
                 </div>
             </div>

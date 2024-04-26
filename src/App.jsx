@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import 'bootstrap/dist/css/bootstrap.css';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Card from './Components/Card';
@@ -18,14 +16,16 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [votes, setUpvotes] = useState([106, 559, 248]);
   const [selectedPost, setSelectedPost] = useState(null);
-
-  // Initialize the state with the original three posts
+  const nowTime = new Date("2024-04-26T08:02:00");
+  const nowDate = nowTime.toLocaleString();
+  
   const [cards, setCards] = useState([
     {
       imgSrc: img4,
       title: "You Are My Meow Meow",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
-      lastUpdated: "Last updated 45 mins ago",
+      createdAt: new Date("2024-04-26T08:02:00"),
+      lastUpdated: `Last updated ${nowTime.toLocaleString()}`, // Use current time for img4
       upvotes: 106,
       comments: []
     },
@@ -33,16 +33,18 @@ function App() {
       imgSrc: img2,
       title: "You Are My Meow Meow",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
-      lastUpdated: "Last updated 45 mins ago",
+      lastUpdated: `Last updated ${new Date("2024-04-26T07:00:00").toLocaleString()}`, // Use img2's creation time
       upvotes: 559,
+      createdAt: new Date("2024-04-26T07:00:00"),
       comments: []
     },
     {
       imgSrc: img3,
       title: "You Are My Meow Meow",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
-      lastUpdated: "Last updated 45 mins ago",
+      lastUpdated: `Last updated ${new Date("2024-04-26T09:00:00").toLocaleString()}`, // Use img3's creation time
       upvotes: 248,
+      createdAt: new Date("2024-04-26T09:00:00"),
       comments: []
     },
   ]);
@@ -62,6 +64,8 @@ function App() {
         text: newPost.content || '',
         lastUpdated: `Last updated ${formattedDate}`,
         upvotes: 0, // Initialize upvotes count to 0
+        createdAt: now,
+        comments: []
     };
 
     // Add the new card to the existing list
@@ -87,16 +91,25 @@ function App() {
     setCards(updatedCards);
   };
 
+// Function to sort posts by created time or upvotes count
+const sortPosts = (criteria) => {
+  let sortedCards = [...cards];
+
+  if (criteria === 'createdTime') {
+    sortedCards.sort((a, b) => b.createdAt - a.createdAt);
+  } else if (criteria === 'upvoteCount') {
+    sortedCards.sort((a, b) => b.upvotes - a.upvotes);
+  }
+
+  // Update the upvotes in the sorted array
+  setUpvotes(sortedCards.map(card => card.upvotes));
+
+  setCards(sortedCards);
+};
+
   return (
     <div>
-      <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
-        <symbol id="check-circle-fill" viewBox="0 0 16 16">
-          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-        </symbol>
-      </svg>
-
-      <Navbar showModal={showCreateModal} toggleModal={toggleModal} />
-
+      <Navbar showModal={showCreateModal} toggleModal={toggleModal} sortPosts={sortPosts} />
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
@@ -117,9 +130,7 @@ function App() {
           </div>
         </div>
       </div>
-
       <Footer />
-
       {/* Control modal visibility */}
       {showCreateModal && (
         <>
@@ -131,11 +142,9 @@ function App() {
           </div>
         </>
       )}
-
       {showModal && (
         <PostModal post={selectedPost} onClose={() => setShowModal(false)} />
       )}
-
       {showSuccessAlert && (
         <div className="alert alert-success success-alert d-flex align-items-center" role="alert">
           <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
