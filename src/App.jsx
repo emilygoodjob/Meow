@@ -81,6 +81,12 @@ function App() {
     setShowModal(true);
   };
 
+  const handleUpvote = (index) => {
+    const updatedCards = [...cards];
+    updatedCards[index].upvotes += 1;
+    setCards(updatedCards);
+  };
+
   return (
     <div>
       <svg xmlns="http://www.w3.org/2000/svg" className="d-none">

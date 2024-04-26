@@ -92,6 +92,10 @@
   width: 60%;
 }
 
+#new-post {
+  width: 100% !important;
+}
+
 .close-btn {
   position: absolute;
   top: 10px;
