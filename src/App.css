@@ -9,7 +9,48 @@
   z-index: 1000;
 }
 
+.container {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.fixed-size-card {
+  width: 400px;
+  height: auto;
+  margin: auto;
+  position: relative;
+}
+
+.fixed-size-card .card-img-top {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  padding: 20px 0;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit browsers */
+}
+
+.card {
+  flex: 0 0 auto;
+  margin-right: 3rem;
+}
+
 /* Texts */
 .custom-color {
   color: black !important;
+}
+
+.card-text {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

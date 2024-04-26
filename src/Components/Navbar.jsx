@@ -57,13 +57,10 @@ function Navbar() {
             <form className="d-flex mx-auto" role="search" style={{ flex: '0 1 auto' }}>
               <input className="form-control me-2" type="search" placeholder="Search Posts by Title" aria-label="Search"></input>
               <button className="btn btn-outline-info me-md-2" type="submit">Search</button>
-              <button class="btn btn-info" type="button">Create</button>
+              <button className="btn btn-info" type="button">Create</button>
             </form>
             
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              {/* <li className="nav-item">
-                <a className="nav-link" href="#" style={{ color: 'inherit' }}></a>
-              </li> */}
               <li className="nav-item">
                 <a className="nav-link" href="#" style={{ color: 'inherit' }}>Profile</a>
               </li>
