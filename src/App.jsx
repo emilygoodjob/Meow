@@ -17,14 +17,14 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollContainer = scrollContainerRef.current;
-      const center = scrollContainer.getBoundingClientRect().width / 2;
+      // const center = scrollContainer.getBoundingClientRect().width / 2;
 
-      Array.from(scrollContainer.children).forEach(card => {
-        const cardCenter = card.getBoundingClientRect().left + card.getBoundingClientRect().width / 2;
-        const distanceFromCenter = Math.abs(center - cardCenter);
-        const scale = Math.max(1 - distanceFromCenter / center, 0.7); // Scales down to 50%
-        card.style.transform = `scale(${scale})`;
-      });
+      // Array.from(scrollContainer.children).forEach(card => {
+      //   const cardCenter = card.getBoundingClientRect().left + card.getBoundingClientRect().width / 2;
+      //   const distanceFromCenter = Math.abs(center - cardCenter);
+      //   const scale = Math.max(1 - distanceFromCenter / center, 0.7); // Scales down to 50%
+      //   card.style.transform = `scale(${scale})`;
+      // });
     };
 
     const container = scrollContainerRef.current;
@@ -38,8 +38,6 @@ function App() {
   return (
     <div>
       <Navbar></Navbar>
-
-      {/* roboot: create post */}
 
       {/* input images from local */}
       {/* <div classNameName="mb-3">
