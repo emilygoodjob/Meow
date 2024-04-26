@@ -50,6 +50,17 @@ function Navbar({ showModal, toggleModal }) {
                             <li className="nav-item">
                                 <a className="nav-link disabled" aria-disabled="true">Disabled</a>
                             </li>
+
+                            {/* Sorting */}
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sorting
+                                </a>
+                                <ul className="dropdown-menu dropdown-menu-center">
+                                    <li><a className="dropdown-item" href="#">Created Time</a></li>
+                                    <li><a className="dropdown-item" href="#">Upvote Counts</a></li>
+                                </ul>
+                            </li>
                         </ul>
                         <form className="d-flex mx-auto" role="search">
                             <input className="form-control me-2" type="search" placeholder="Search Posts by Title" aria-label="Search"></input>
