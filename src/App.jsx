@@ -95,18 +95,18 @@ function App() {
         <div className="row">
           <div className="col-12">
             <div className="horizontal-scroll">
-              {cards.map((card, index) => (
-                <Card
-                  key={index}
-                  imgSrc={card.imgSrc}
-                  title={card.title}
-                  text={card.text}
-                  lastUpdated={card.lastUpdated}
-                  index={index}
-                  upvotes={card.upvotes}
-                  onClick={() => handleCardClick(card)}
-                />
-              ))}
+            {cards.map((card, index) => (
+              <Card
+                key={index}
+                imgSrc={card.imgSrc}
+                title={card.title}
+                text={card.text}
+                lastUpdated={card.lastUpdated}
+                upvotes={card.upvotes}
+                onClick={() => handleCardClick(card)}
+                onUpvote={() => handleUpvote(index)}
+              />
+            ))}
             </div>
           </div>
         </div>
