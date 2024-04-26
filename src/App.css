@@ -62,6 +62,86 @@
   z-index: 1050;
 }
 
+
+/* Pop up Single Page */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+}
+
+.modal-content {
+  position: relative;
+  background-color: white;
+  padding: 40px;
+  border-radius: 5px;
+  width: 60%;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.post-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-image-container {
+  flex: 1;
+  margin-right: 3rem;
+  text-align: center;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+}
+
+.post-info {
+  flex: 2;
+}
+
+.upvote {
+  bottom: 0;
+  right: 0;
+  margin-top: 1rem;
+  margin-bottom: -1rem;
+}
+
+.add-comment-btn {
+  margin-top: 1rem;
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-comment-btn {
+  align-self: flex-end;
+  margin-top: 1rem;
+}
+
 /* Texts */
 .custom-color {
   color: black !important;
@@ -71,4 +151,9 @@
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.post-text {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
 }

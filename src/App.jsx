@@ -5,6 +5,7 @@ import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Card from './Components/Card';
 import CreatePost from './Components/CreatePost';
+import PostModal from './Components/PostModal';
 import img4 from './assets/img4.jpg';
 import img2 from './assets/img2.jpg';
 import img3 from './assets/img3.jpg';
@@ -13,8 +14,10 @@ import './App.css';
 function App() {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   // Control modal visibility
+  const [showCreateModal, setShowCreateModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [votes, setUpvotes] = useState([106, 559, 248]);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   // Initialize the state with the original three posts
   const [cards, setCards] = useState([
@@ -24,6 +27,7 @@ function App() {
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
       lastUpdated: "Last updated 45 mins ago",
       upvotes: 106,
+      comments: []
     },
     {
       imgSrc: img2,
@@ -31,6 +35,7 @@ function App() {
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
       lastUpdated: "Last updated 45 mins ago",
       upvotes: 559,
+      comments: []
     },
     {
       imgSrc: img3,
@@ -38,11 +43,12 @@ function App() {
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
       lastUpdated: "Last updated 45 mins ago",
       upvotes: 248,
+      comments: []
     },
   ]);
 
   const toggleModal = () => {
-    setShowModal(!showModal);
+    setShowCreateModal(!showCreateModal);
   };  
 
   const addPost = (newPost) => {
@@ -60,7 +66,7 @@ function App() {
 
     // Add the new card to the existing list
     setCards((prevCards) => [...prevCards, newCard]);
-    setShowModal(false);
+    setShowCreateModal(false);
     setShowSuccessAlert(true);
     setUpvotes((votes) => [...votes, newCard.upvotes]);
 
@@ -68,18 +74,22 @@ function App() {
     setTimeout(() => {
         setShowSuccessAlert(false);
     }, 3000);
-};
+  };
 
+  const handleCardClick = (card) => {
+    setSelectedPost(card);
+    setShowModal(true);
+  };
 
   return (
     <div>
       <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
-      <symbol id="check-circle-fill" viewBox="0 0 16 16">
-        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-      </symbol>
+        <symbol id="check-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
       </svg>
 
-      <Navbar showModal={showModal} toggleModal={toggleModal} />
+      <Navbar showModal={showCreateModal} toggleModal={toggleModal} />
 
       <div className="container mt-5">
         <div className="row">
@@ -94,6 +104,7 @@ function App() {
                   lastUpdated={card.lastUpdated}
                   index={index}
                   upvotes={card.upvotes}
+                  onClick={() => handleCardClick(card)}
                 />
               ))}
             </div>
@@ -104,15 +115,19 @@ function App() {
       <Footer />
 
       {/* Control modal visibility */}
-      {showModal && (
+      {showCreateModal && (
         <>
           <div className="backdrop"></div>
           <div className="modal show d-block" tabIndex="-1">
             <div className="modal-dialog modal-dialog-centered">
-            <CreatePost addPost={addPost} onClose={() => setShowModal(false)} />
+            <CreatePost addPost={addPost} onClose={() => setShowCreateModal(false)} />
             </div>
           </div>
         </>
+      )}
+
+      {showModal && (
+        <PostModal post={selectedPost} onClose={() => setShowModal(false)} />
       )}
 
       {showSuccessAlert && (
