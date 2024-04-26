@@ -7,6 +7,9 @@ import PostModal from './Components/PostModal';
 import img4 from './assets/img4.jpg';
 import img2 from './assets/img2.jpg';
 import img3 from './assets/img3.jpg';
+import img1 from './assets/img1.jpg';
+import img5 from './assets/img5.jpg';
+
 import './App.css';
 
 function App() {
@@ -27,7 +30,7 @@ function App() {
   const [cards, setCards] = useState([
     {
       imgSrc: img4,
-      title: "Meow1",
+      title: "Cute Cat",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
       createdAt: new Date("2024-04-26T08:02:00"),
       lastUpdated: `Last updated ${nowTime.toLocaleString()}`, 
@@ -50,6 +53,24 @@ function App() {
       lastUpdated: `Last updated ${new Date("2024-04-26T09:00:00").toLocaleString()}`,
       upvotes: 248,
       createdAt: new Date("2024-04-26T09:00:00"),
+      comments: []
+    },
+    {
+      imgSrc: img1,
+      title: "Bollon Cat",
+      text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
+      createdAt: new Date("2024-04-26T12:02:00"),
+      lastUpdated: `Last updated ${nowTime.toLocaleString()}`, 
+      upvotes: 943,
+      comments: []
+    },
+    {
+      imgSrc: img5,
+      title: "Lyging Cat",
+      text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
+      createdAt: new Date("2024-03-26T12:02:00"),
+      lastUpdated: `Last updated ${nowTime.toLocaleString()}`, 
+      upvotes: 1342,
       comments: []
     },
   ]);
