@@ -119,7 +119,7 @@ const sortPosts = (criteria) => {
         toggleModal={toggleModal} 
         sortPosts={sortPosts} 
         allPosts={cards} 
-        setSearchResults={handleSearchResults}
+        setSearchResultsProp={handleSearchResults}
       />
       <div className="container mt-5">
         <div className="row">
