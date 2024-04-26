@@ -1,13 +1,15 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import logo from '../assets/logo-no-background.svg';
 import CreatePost from './CreatePost';
 import '../App.css';
 
-function Navbar({ showModal, toggleModal, sortPosts }) {
+function Navbar({ showModal, toggleModal, sortPosts, allPosts, setSearchResultsProp }) {
     const navbarRef = useRef(null);
     const [color, setColor] = useState('#F4FAFC'); // Default color
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
 
     const handleChange = (event) => {
         setColor(event.target.value);
@@ -20,6 +22,12 @@ function Navbar({ showModal, toggleModal, sortPosts }) {
         const b = parseInt(hex.substr(4, 2), 16);
         return (r * 0.299 + g * 0.587 + b * 0.114) < 160;
     }
+
+    const handleSearch = (event) => {
+        event.preventDefault();
+        const searchResult = allPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()));
+        setSearchResultsProp(searchResult);
+      };
 
     useEffect(() => {
         if (navbarRef.current) {
@@ -62,8 +70,8 @@ function Navbar({ showModal, toggleModal, sortPosts }) {
                                 </ul>
                             </li>
                         </ul>
-                        <form className="d-flex mx-auto" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search Posts by Title" aria-label="Search"></input>
+                        <form className="d-flex mx-auto" role="search" onSubmit={handleSearch}>
+                            <input className="form-control me-2" type="search" placeholder="Search Posts by Title" aria-label="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
                             <button className="btn btn-outline-info me-md-2" type="submit">Search</button>
                             <button className="btn btn-outline-success" type="button" onClick={toggleModal}>Create</button>
                         </form>

@@ -11,21 +11,26 @@ import './App.css';
 
 function App() {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  // Control modal visibility
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [votes, setUpvotes] = useState([106, 559, 248]);
   const [selectedPost, setSelectedPost] = useState(null);
   const nowTime = new Date("2024-04-26T08:02:00");
   const nowDate = nowTime.toLocaleString();
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearchResults = (results) => {
+    setSearchResults(results);
+  };
   
+  // Store Initial Vlues for Attributes
   const [cards, setCards] = useState([
     {
       imgSrc: img4,
-      title: "You Are My Meow Meow",
+      title: "Meow1",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
       createdAt: new Date("2024-04-26T08:02:00"),
-      lastUpdated: `Last updated ${nowTime.toLocaleString()}`, // Use current time for img4
+      lastUpdated: `Last updated ${nowTime.toLocaleString()}`, 
       upvotes: 106,
       comments: []
     },
@@ -33,7 +38,7 @@ function App() {
       imgSrc: img2,
       title: "You Are My Meow Meow",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
-      lastUpdated: `Last updated ${new Date("2024-04-26T07:00:00").toLocaleString()}`, // Use img2's creation time
+      lastUpdated: `Last updated ${new Date("2024-04-26T07:00:00").toLocaleString()}`, 
       upvotes: 559,
       createdAt: new Date("2024-04-26T07:00:00"),
       comments: []
@@ -42,7 +47,7 @@ function App() {
       imgSrc: img3,
       title: "You Are My Meow Meow",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
-      lastUpdated: `Last updated ${new Date("2024-04-26T09:00:00").toLocaleString()}`, // Use img3's creation time
+      lastUpdated: `Last updated ${new Date("2024-04-26T09:00:00").toLocaleString()}`,
       upvotes: 248,
       createdAt: new Date("2024-04-26T09:00:00"),
       comments: []
@@ -109,23 +114,44 @@ const sortPosts = (criteria) => {
 
   return (
     <div>
-      <Navbar showModal={showCreateModal} toggleModal={toggleModal} sortPosts={sortPosts} />
+      <Navbar 
+        showModal={showCreateModal} 
+        toggleModal={toggleModal} 
+        sortPosts={sortPosts} 
+        allPosts={cards} 
+        setSearchResults={handleSearchResults}
+      />
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
             <div className="horizontal-scroll">
-            {cards.map((card, index) => (
-              <Card
-                key={index}
-                imgSrc={card.imgSrc}
-                title={card.title}
-                text={card.text}
-                lastUpdated={card.lastUpdated}
-                upvotes={card.upvotes}
-                onClick={() => handleCardClick(card)}
-                onUpvote={() => handleUpvote(index)}
-              />
-            ))}
+              {searchResults.length > 0 ? (
+                searchResults.map((result, index) => (
+                  <Card
+                    key={index}
+                    imgSrc={result.imgSrc}
+                    title={result.title}
+                    text={result.text}
+                    lastUpdated={result.lastUpdated}
+                    upvotes={result.upvotes}
+                    onClick={() => handleCardClick(result)}
+                    onUpvote={() => handleUpvote(index)}
+                  />
+                ))
+              ) : (
+                cards.map((card, index) => (
+                  <Card
+                    key={index}
+                    imgSrc={card.imgSrc}
+                    title={card.title}
+                    text={card.text}
+                    lastUpdated={card.lastUpdated}
+                    upvotes={card.upvotes}
+                    onClick={() => handleCardClick(card)}
+                    onUpvote={() => handleUpvote(index)}
+                  />
+                ))
+              )}
             </div>
           </div>
         </div>
