@@ -14,6 +14,7 @@ function App() {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   // Control modal visibility
   const [showModal, setShowModal] = useState(false);
+  const votes = [106, 559, 248];
 
   // Initialize the state with the original three posts
   const [cards, setCards] = useState([
@@ -46,23 +47,25 @@ function App() {
     const formattedDate = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
 
     const newCard = {
-      // Use an empty string if no image URL is provided
-      imgSrc: newPost.imageUrl || '',
-      title: newPost.title,
-      text: newPost.content || '',
-      lastUpdated: `Last updated ${formattedDate}`,
+        // Use an empty string if no image URL is provided
+        imgSrc: newPost.imageUrl || '',
+        title: newPost.title,
+        text: newPost.content || '',
+        lastUpdated: `Last updated ${formattedDate}`,
+        upvotes: 0, // Initialize upvotes count to 0
     };
 
     // Add the new card to the existing list
     setCards((prevCards) => [...prevCards, newCard]);
     setShowModal(false);
     setShowSuccessAlert(true);
+    setUpvotes((votes) => [...votes, newCard.upvotes])
 
     // Automatically hide alert after 3 seconds
     setTimeout(() => {
         setShowSuccessAlert(false);
     }, 3000);
-  };
+};
 
 
   return (
@@ -87,6 +90,7 @@ function App() {
                   text={card.text}
                   lastUpdated={card.lastUpdated}
                   index={index}
+                  upvotes={card.upvotes}
                 />
               ))}
             </div>

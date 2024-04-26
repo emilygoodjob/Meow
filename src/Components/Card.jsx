@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import heart from '../assets/heart.png';
 
-function Card({ imgSrc, title, text, lastUpdated, style, index }) {
-    // Initialize upvotes based on the index
-    const initialUpvotes = [106, 559, 248];
-    const [upvotes, setUpvotes] = useState(initialUpvotes[index]);
+function Card({ imgSrc, title, text, lastUpdated, style }) {
+    // Initialize upvotes state with default value of 0
+    const [upvotes, setUpvotes] = useState(0);
 
     const handleUpvote = () => {
         setUpvotes(prevUpvotes => prevUpvotes + 1);
