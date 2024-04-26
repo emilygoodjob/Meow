@@ -5,18 +5,12 @@ import logo from '../assets/logo-no-background.svg';
 import CreatePost from './CreatePost';
 import '../App.css';
 
-function Navbar() {
+function Navbar({ showModal, toggleModal }) {
     const navbarRef = useRef(null);
     const [color, setColor] = useState('#F4FAFC'); // Default color
-    const [showModal, setShowModal] = useState(false);
 
     const handleChange = (event) => {
         setColor(event.target.value);
-    };
-
-    const handleCreatePost = (post) => {
-        console.log(post);
-        setShowModal(false);
     };
 
     function isColorDark(color) {
@@ -60,7 +54,7 @@ function Navbar() {
                         <form className="d-flex mx-auto" role="search">
                             <input className="form-control me-2" type="search" placeholder="Search Posts by Title" aria-label="Search"></input>
                             <button className="btn btn-outline-info me-md-2" type="submit">Search</button>
-                            <button className="btn btn-outline-success" type="button" onClick={() => setShowModal(true)}>Create</button>
+                            <button className="btn btn-outline-success" type="button" onClick={toggleModal}>Create</button>
                         </form>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
@@ -84,16 +78,6 @@ function Navbar() {
                     </div>
                 </div>
             </nav>
-            {showModal && (
-                <>
-                    <div className="backdrop"></div>  {/* Add backdrop */}
-                    <div className="modal show d-block" tabIndex="-1">
-                        <div className="modal-dialog">
-                          <CreatePost onClose={() => setShowModal(false)} />
-                        </div>
-                    </div>
-                </>
-            )}
         </div>
     );
 }

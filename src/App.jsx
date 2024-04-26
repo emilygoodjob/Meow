@@ -11,8 +11,6 @@ import img3 from './assets/img3.jpg';
 import './App.css';
 
 function App() {
-  const scrollContainerRef = useRef(null);
-
   // Initialize the state with the original three posts
   const [cards, setCards] = useState([
     {
@@ -36,9 +34,11 @@ function App() {
   ]);
 
   const [showModal, setShowModal] = useState(false); // Control modal visibility
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };  
 
-  const handleCreatePost = (newPost) => {
-    console.log("handleCreatePost called with:", newPost);
+  const addPost = (newPost) => {
     const now = new Date();
     const formattedDate = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
 
@@ -51,34 +51,18 @@ function App() {
 
     // Add the new card to the existing list
     setCards((prevCards) => [...prevCards, newCard]);
-    setShowModal(false); // Close the modal after creating the post
+    setShowModal(false);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollContainer = scrollContainerRef.current;
-      // Optional scroll animation logic
-    };
-
-    const container = scrollContainerRef.current;
-    container.addEventListener('scroll', handleScroll);
-
-    return () => {
-      container.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  console.log('Rendering App');
-  console.log("handleCreatePost function:", handleCreatePost);
 
   return (
     <div>
-      <Navbar />
+      <Navbar showModal={showModal} toggleModal={toggleModal} />
 
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <div className="horizontal-scroll" ref={scrollContainerRef}>
+            <div className="horizontal-scroll">
               {cards.map((card, index) => (
                 <Card
                   key={index}
@@ -101,7 +85,7 @@ function App() {
           <div className="backdrop"></div>
           <div className="modal show d-block" tabIndex="-1">
             <div className="modal-dialog modal-dialog-centered">
-            <CreatePost addPost={handleCreatePost} onClose={() => setShowModal(false)} />
+            <CreatePost addPost={addPost} onClose={() => setShowModal(false)} />
             </div>
           </div>
         </>
