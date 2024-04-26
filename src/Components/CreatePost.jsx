@@ -22,7 +22,7 @@ function CreatePost({ addPost, onClose }) {
         event.preventDefault();
         if (post.title) {
             addPost(post);
-            setPost({ title: '', imageUrl: '', content: '' });
+            setPost({ title: '', imageUrl: '', content: '', imageFile: null });
             onClose(); // Close the modal after submitting
         } else {
         alert('Title is required.'); 

@@ -14,7 +14,7 @@ function App() {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   // Control modal visibility
   const [showModal, setShowModal] = useState(false);
-  const votes = [106, 559, 248];
+  const [votes, setUpvotes] = useState([106, 559, 248]);
 
   // Initialize the state with the original three posts
   const [cards, setCards] = useState([
@@ -23,18 +23,21 @@ function App() {
       title: "You Are My Meow Meow",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
       lastUpdated: "Last updated 45 mins ago",
+      upvotes: 106,
     },
     {
       imgSrc: img2,
       title: "You Are My Meow Meow",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
       lastUpdated: "Last updated 45 mins ago",
+      upvotes: 559,
     },
     {
       imgSrc: img3,
       title: "You Are My Meow Meow",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
       lastUpdated: "Last updated 45 mins ago",
+      upvotes: 248,
     },
   ]);
 
@@ -59,7 +62,7 @@ function App() {
     setCards((prevCards) => [...prevCards, newCard]);
     setShowModal(false);
     setShowSuccessAlert(true);
-    setUpvotes((votes) => [...votes, newCard.upvotes])
+    setUpvotes((votes) => [...votes, newCard.upvotes]);
 
     // Automatically hide alert after 3 seconds
     setTimeout(() => {
