@@ -2,6 +2,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
+import logo from './assets/logo-no-background.svg';
+
 import './App.css'
 
 function App() {

@@ -48,19 +48,38 @@ function Navbar() {
               <li className="nav-item">
                 <a className="nav-link" href="#" style={{ color: 'inherit' }}>Link</a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link disabled" aria-disabled="true" style={{ color: 'inherit' }}>Disabled</a>
+              </li>
+            </ul>
+
+            {/* Search Button */}
+            <form className="d-flex mx-auto" role="search" style={{ flex: '0 1 auto' }}>
+              <input className="form-control me-2" type="search" placeholder="Search Posts by Title" aria-label="Search"></input>
+              <button className="btn btn-outline-info me-md-2" type="submit">Search</button>
+              <button class="btn btn-info" type="button">Create</button>
+            </form>
+            
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              {/* <li className="nav-item">
+                <a className="nav-link" href="#" style={{ color: 'inherit' }}></a>
+              </li> */}
+              <li className="nav-item">
+                <a className="nav-link" href="#" style={{ color: 'inherit' }}>Profile</a>
+              </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'inherit' }}>
                   Settings
                 </a>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu dropdown-menu-end">
                   <li><a className="dropdown-item custom-color disabled" aria-disabled="true">Change Interface Color</a></li>
                   <li>
                     <input 
                       type="color" 
                       className="dropdown-item form-control form-control-color" 
                       id="exampleColorInput" 
-                      value={color} // Bind state to the value
-                      onChange={handleChange} // Update state on change
+                      value={color}
+                      onChange={handleChange}
                       title="Choose your color"
                     />  
                   </li>
@@ -69,14 +88,7 @@ function Navbar() {
                   <li><a className="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
-              <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true" style={{ color: 'inherit' }}>Disabled</a>
-              </li>
             </ul>
-            <form className="d-flex" role="search">
-              <input className="form-control me-2" type="search" placeholder="Search Posts by Title" aria-label="Search"></input>
-              <button className="btn btn-info" type="submit">Search</button>
-            </form>
           </div>
         </div>
       </nav>
