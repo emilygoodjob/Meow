@@ -54,6 +54,14 @@
   z-index: 1050;  /* Set z-index lower than modal */
 }
 
+.success-alert {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+}
+
 /* Texts */
 .custom-color {
   color: black !important;

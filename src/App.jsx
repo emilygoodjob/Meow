@@ -11,6 +11,10 @@ import img3 from './assets/img3.jpg';
 import './App.css';
 
 function App() {
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  // Control modal visibility
+  const [showModal, setShowModal] = useState(false);
+
   // Initialize the state with the original three posts
   const [cards, setCards] = useState([
     {
@@ -33,7 +37,6 @@ function App() {
     },
   ]);
 
-  const [showModal, setShowModal] = useState(false); // Control modal visibility
   const toggleModal = () => {
     setShowModal(!showModal);
   };  
@@ -43,7 +46,8 @@ function App() {
     const formattedDate = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
 
     const newCard = {
-      imgSrc: newPost.imageUrl || '', // Use an empty string if no image URL is provided
+      // Use an empty string if no image URL is provided
+      imgSrc: newPost.imageUrl || '',
       title: newPost.title,
       text: newPost.content || '',
       lastUpdated: `Last updated ${formattedDate}`,
@@ -52,11 +56,23 @@ function App() {
     // Add the new card to the existing list
     setCards((prevCards) => [...prevCards, newCard]);
     setShowModal(false);
+    setShowSuccessAlert(true);
+
+    // Automatically hide alert after 3 seconds
+    setTimeout(() => {
+        setShowSuccessAlert(false);
+    }, 3000);
   };
 
 
   return (
     <div>
+      <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
+      <symbol id="check-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </symbol>
+      </svg>
+
       <Navbar showModal={showModal} toggleModal={toggleModal} />
 
       <div className="container mt-5">
@@ -90,6 +106,17 @@ function App() {
           </div>
         </>
       )}
+
+        {showSuccessAlert && (
+          <div className="alert alert-success success-alert d-flex align-items-center" role="alert">
+            <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+              <use xlinkHref="#check-circle-fill" /> 
+            </svg>
+            <div>
+              Successfully created post!
+            </div>
+          </div>
+        )}
     </div>
   );
 }
