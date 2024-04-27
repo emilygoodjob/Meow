@@ -117,21 +117,30 @@ function App() {
     setCards(updatedCards);
   };
 
-// Function to sort posts by created time or upvotes count
-const sortPosts = (criteria) => {
-  let sortedCards = [...cards];
+  const handleDelete = (index) => {
+    console.log("Deleting card at index:", index);
+    const updatedCards = [...cards];
+    updatedCards.splice(index, 1);
+    console.log("Updated cards after deletion:", updatedCards);
+    setCards(updatedCards);
+    setShowModal(false); // Close modal after deletion
+  };
 
-  if (criteria === 'createdTime') {
-    sortedCards.sort((a, b) => b.createdAt - a.createdAt);
-  } else if (criteria === 'upvoteCount') {
-    sortedCards.sort((a, b) => b.upvotes - a.upvotes);
-  }
+  // Function to sort posts by created time or upvotes count
+  const sortPosts = (criteria) => {
+    let sortedCards = [...cards];
 
-  // Update the upvotes in the sorted array
-  setUpvotes(sortedCards.map(card => card.upvotes));
+    if (criteria === 'createdTime') {
+      sortedCards.sort((a, b) => b.createdAt - a.createdAt);
+    } else if (criteria === 'upvoteCount') {
+      sortedCards.sort((a, b) => b.upvotes - a.upvotes);
+    }
 
-  setCards(sortedCards);
-};
+    // Update the upvotes in the sorted array
+    setUpvotes(sortedCards.map(card => card.upvotes));
+
+    setCards(sortedCards);
+  };
 
   return (
     <div>
@@ -157,6 +166,7 @@ const sortPosts = (criteria) => {
                     upvotes={result.upvotes}
                     onClick={() => handleCardClick(result)}
                     onUpvote={() => handleUpvote(index)}
+                    onDelete={() => handleDelete(index)}
                   />
                 ))
               ) : (
@@ -170,6 +180,7 @@ const sortPosts = (criteria) => {
                     upvotes={card.upvotes}
                     onClick={() => handleCardClick(card)}
                     onUpvote={() => handleUpvote(index)}
+                    onDelete={() => handleDelete(index)}
                   />
                 ))
               )}
