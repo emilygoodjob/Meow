@@ -18,9 +18,11 @@ function Card({ imgSrc, title, text, lastUpdated, style, upvotes, onClick, onUpv
         onUpvote();
     };
 
-    const handleEdit = () => {
+    const handleEdit = (e) => {
+        e.stopPropagation();
         onUpdate(index, selectedPost, { imgSrc, title, text, lastUpdated, upvotes });
     };
+    
 
     return (
         <div className="card fixed-size-card" style={style} onClick={onClick}>
@@ -45,7 +47,7 @@ function Card({ imgSrc, title, text, lastUpdated, style, upvotes, onClick, onUpv
                         ({upvotesCount})
                     </button>
                     {/* Edit Button */}
-                    <button className="btn" onClick={(e) => { e.stopPropagation(); handleEdit(); }}>
+                    <button className="btn" onClick={(e) => handleEdit(e)}>
                         <img src={editIcon} alt="Edit" style={{ width: '20px', marginRight: '-10px' }} />
                     </button>
                     {/* Delete Button */}

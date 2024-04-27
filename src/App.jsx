@@ -113,6 +113,10 @@ function App() {
     setShowModal(true);
   };
 
+  // const handleEditClick = (card) => {
+  //   setSelectedPost(card);
+  // }
+
   const handleUpvote = (index) => {
     const updatedCards = [...cards];
     updatedCards[index].upvotes += 1;
@@ -143,12 +147,13 @@ function App() {
   };
 
   // Update post
-  const updatePost = (index, updatedPost) => {
+  const updatePost = (index, selectedPost) => {
+    console.log("updatePost function " + selectedPost);
     setCards(prevCards => {
       return prevCards.map((card, i) => {
         if (i === index) {
           // Merge updated post data with existing post data
-          return { ...card, ...updatedPost };
+          return { ...card, ...selectedPost };
         }
         return card;
       });
@@ -181,9 +186,10 @@ function App() {
                     onClick={() => handleCardClick(result)}
                     onUpvote={() => handleUpvote(index)}
                     onDelete={() => handleDelete(index)}
-                    onUpdate={(updatedPost) => updatePost(index, selectedPost, updatedPost)}
-                    index={index}
-                    selectedPost={selectedPost}
+                    onUpdate={() => {
+                      setSelectedPost(result);
+                      updatePost(index, selectedPost);
+                    }}
                   />
                 ))
               ) : (
@@ -199,7 +205,10 @@ function App() {
                       onClick={() => handleCardClick(card)}
                       onUpvote={() => handleUpvote(index)}
                       onDelete={() => handleDelete(index)}
-                      onUpdate={(updatedPost) => updatePost(index, updatedPost)}
+                      onUpdate={() => {
+                        setSelectedPost(card);
+                        updatePost(index, selectedPost);
+                      }}
                     />
                   );
                 })
@@ -234,12 +243,19 @@ function App() {
         </div>
       )}
 
-      {selectedPost && showEditModal && (
-        <UpdatePost
-          post={selectedPost}
-          imgSrc={selectedPost.imgSrc}
-          updatePost={(updatedPost) => updatePost(selectedPost.index, updatedPost)}
-        />
+      {showEditModal && (
+          <>
+              <div className="backdrop" onClick={() => setShowEditModal(false)}></div>
+              <div className="modal show d-block" tabIndex="-1">
+                  <div className="modal-dialog modal-dialog-centered">
+                      <UpdatePost
+                          post={selectedPost}
+                          updatePost={() => updatePost(selectedPost.index, selectedPost)}
+                          onClose={() => setShowEditModal(false)}
+                      />
+                  </div>
+              </div>
+          </>
       )}
     </div>
   );

@@ -29,7 +29,7 @@ function UpdatePost({ post, updatePost, onClose }) {
     };
 
     return (
-        <div className="modal-content" id='update-post'>
+        <div className="modal-content" id='new-post'>
             <div className="modal-header">
                 <h5 className="modal-title">Update Post</h5>
                 <button type="button" className="btn-close" aria-label="Close" onClick={onClose}/>
