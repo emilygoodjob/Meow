@@ -143,9 +143,7 @@ function App() {
   };
 
   // Update post
-  const updatePost = (index, selectedPost) => {
-    // console.log("post index: ", index, " selectedPost: ", selectedPost);
-    
+  const updatePost = (index, selectedPost) => {    
     setCards(prevCards => {
       return prevCards.map((card, i) => {
         if (i === index) {
@@ -247,7 +245,7 @@ function App() {
                   <div className="modal-dialog modal-dialog-centered">
                       <UpdatePost
                           post={selectedPost}
-                          updatePost={() => updatePost(index, selectedPost)}
+                          updatePost={(index, updatedPost) => updatePost(index, selectedPost)}
                           onClose={() => setShowEditModal(false)}
                       />
                   </div>

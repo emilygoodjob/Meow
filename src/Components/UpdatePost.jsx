@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-function UpdatePost({ post, updatePost, onClose }) {
+function UpdatePost({ post, index, updatePost, onClose }) {
     // State to hold the form data
     const [updatedPost, setUpdatedPost] = useState({
         title: post.title,
-        imageUrl: post.imageUrl,
-        content: post.content,
+        imageUrl: post.imgSrc,
+        content: post.text,
     });
 
     // Handle form field changes
@@ -21,7 +21,7 @@ function UpdatePost({ post, updatePost, onClose }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (updatedPost.title) {
-            updatePost(updatedPost);
+            updatePost(index, updatedPost);
             onClose(); // Close the modal after submitting
         } else {
             alert('Title is required.'); 
