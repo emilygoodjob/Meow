@@ -52,7 +52,7 @@ GIF created with LICEcap
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Images from Xiaohongshu.
 
 ## License
 
