@@ -1,31 +1,38 @@
 import React, { useState } from 'react';
 
 function UpdatePost({ post, index, updatePost, onClose }) {
-    // State to hold the form data
+    // Ensure initial state is never undefined
     const [updatedPost, setUpdatedPost] = useState({
-        title: post.title,
-        imageUrl: post.imgSrc,
-        content: post.text,
+        title: post?.title || '',
+        imgUrl: post?.imgSrc || '',
+        text: post?.text || '',
     });
 
     // Handle form field changes
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setUpdatedPost((prevPost) => ({
-            ...prevPost,
-            [name]: value,
-        }));
+
+        // Update the state and log the updated post
+        setUpdatedPost((prevPost) => {
+            const newPost = {
+                ...prevPost,
+                [name]: value,
+            };
+            return newPost;
+        });
     };
 
     // Handle form submission
     const handleSubmit = (event) => {
         event.preventDefault();
         if (updatedPost.title) {
-            updatePost(index, updatedPost);
+            updatePost(index, updatedPost); // Pass the updated post to the parent component
             onClose(); // Close the modal after submitting
         } else {
-            alert('Title is required.'); 
+            alert('Title is required.');
         }
+
+        console.log("Updated post after submission:", updatedPost);
     };
 
     return (
@@ -54,8 +61,8 @@ function UpdatePost({ post, index, updatePost, onClose }) {
                     <div className="form-floating mb-3">
                         <input
                             type="text"
-                            name="imageUrl"
-                            value={updatedPost.imageUrl}
+                            name="imgUrl"
+                            value={updatedPost.imgUrl}
                             onChange={handleChange}
                             className="form-control"
                             id="imageUrlInput"
@@ -65,8 +72,8 @@ function UpdatePost({ post, index, updatePost, onClose }) {
                     </div>
                     <div className="form-floating">
                         <textarea
-                            name="content"
-                            value={updatedPost.content}
+                            name="text"
+                            value={updatedPost.text}
                             onChange={handleChange}
                             className="form-control"
                             id="contentInput"
@@ -79,7 +86,7 @@ function UpdatePost({ post, index, updatePost, onClose }) {
 
                 {/* Update Button */}
                 <div className="modal-footer">
-                    <button type="submit" className="btn btn-info">Update Post</button> {/* Ensure this triggers handleSubmit */}
+                    <button type="submit" className="btn btn-info">Update Post</button>
                 </div>
             </form>
         </div>

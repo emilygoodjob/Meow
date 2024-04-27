@@ -144,12 +144,13 @@ function App() {
 
   // Update post
   const updatePost = (index, selectedPost) => {    
+    console.log("ads ", selectedPost);
     setCards(prevCards => {
       return prevCards.map((card, i) => {
         if (i === index) {
-          // Merge updated post data with existing post data
-          return { ...card, ...selectedPost };
+          return { ...card, ...selectedPost, lastUpdated: `Last updated ${new Date().toLocaleString()}` };
         }
+        console.log("New cards after update:", card); 
         return card;
       });
     });
@@ -225,7 +226,10 @@ function App() {
         </>
       )}
       {showModal && (
-        <PostModal post={selectedPost} onClose={() => setShowModal(false)} />
+        <PostModal
+          post={selectedPost}
+          onClose={() => setShowModal(false)}
+        />
       )}
       {showSuccessAlert && (
         <div className="alert alert-success success-alert d-flex align-items-center" role="alert">
@@ -245,7 +249,8 @@ function App() {
                   <div className="modal-dialog modal-dialog-centered">
                       <UpdatePost
                           post={selectedPost}
-                          updatePost={(index, updatedPost) => updatePost(index, selectedPost)}
+                          index={cards.findIndex(card => card === selectedPost)} 
+                          updatePost={(index, updatedPost) => updatePost(index, updatedPost)}
                           onClose={() => setShowEditModal(false)}
                       />
                   </div>
