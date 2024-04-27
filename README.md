@@ -4,7 +4,7 @@ Submitted by: **Emily Wang**
 
 This web app: **Final Project**
 
-Time spent: **13** hours spent in total
+Time spent: **19** hours spent in total
 
 ## Required Features
 
@@ -20,7 +20,7 @@ The following **required** functionality is completed:
 - [x] **A separate post page for each created post, where any additional information is shown is linked whenever a user clicks a post**
 - [x] **Users can leave comments underneath a post on the post's separate page**
 - [x] **Each post should have an upvote button on the post's page. Each click increases its upvotes count by one and users can upvote any number of times**
-- [ ] **A previously created post can be edited or deleted from its post page**
+- [x] **A previously created post can be edited or deleted from its post page**
 
 The following **optional** features are implemented:
 
@@ -41,7 +41,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='final_project.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with LICEcap  
