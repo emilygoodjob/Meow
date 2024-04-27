@@ -4,6 +4,7 @@ import Footer from './Components/Footer';
 import Card from './Components/Card';
 import CreatePost from './Components/CreatePost';
 import PostModal from './Components/PostModal';
+import UpdatePost from './Components/UpdatePost';
 import img4 from './assets/img4.jpg';
 import img2 from './assets/img2.jpg';
 import img3 from './assets/img3.jpg';
@@ -21,6 +22,7 @@ function App() {
   const nowTime = new Date("2024-04-26T08:02:00");
   const nowDate = nowTime.toLocaleString();
   const [searchResults, setSearchResults] = useState([]);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const handleSearchResults = (results) => {
     setSearchResults(results);
@@ -118,10 +120,8 @@ function App() {
   };
 
   const handleDelete = (index) => {
-    console.log("Deleting card at index:", index);
     const updatedCards = [...cards];
     updatedCards.splice(index, 1);
-    console.log("Updated cards after deletion:", updatedCards);
     setCards(updatedCards);
     setShowModal(false); // Close modal after deletion
   };
@@ -140,6 +140,20 @@ function App() {
     setUpvotes(sortedCards.map(card => card.upvotes));
 
     setCards(sortedCards);
+  };
+
+  // Update post
+  const updatePost = (index, updatedPost) => {
+    setCards(prevCards => {
+      return prevCards.map((card, i) => {
+        if (i === index) {
+          // Merge updated post data with existing post data
+          return { ...card, ...updatedPost };
+        }
+        return card;
+      });
+    });
+    setShowEditModal(true);
   };
 
   return (
@@ -167,22 +181,28 @@ function App() {
                     onClick={() => handleCardClick(result)}
                     onUpvote={() => handleUpvote(index)}
                     onDelete={() => handleDelete(index)}
+                    onUpdate={(updatedPost) => updatePost(index, selectedPost, updatedPost)}
+                    index={index}
+                    selectedPost={selectedPost}
                   />
                 ))
               ) : (
-                cards.map((card, index) => (
-                  <Card
-                    key={index}
-                    imgSrc={card.imgSrc}
-                    title={card.title}
-                    text={card.text}
-                    lastUpdated={card.lastUpdated}
-                    upvotes={card.upvotes}
-                    onClick={() => handleCardClick(card)}
-                    onUpvote={() => handleUpvote(index)}
-                    onDelete={() => handleDelete(index)}
-                  />
-                ))
+                cards.map((card, index) => {
+                  return (
+                    <Card
+                      key={index}
+                      imgSrc={card.imgSrc}
+                      title={card.title}
+                      text={card.text}
+                      lastUpdated={card.lastUpdated}
+                      upvotes={card.upvotes}
+                      onClick={() => handleCardClick(card)}
+                      onUpvote={() => handleUpvote(index)}
+                      onDelete={() => handleDelete(index)}
+                      onUpdate={(updatedPost) => updatePost(index, updatedPost)}
+                    />
+                  );
+                })
               )}
             </div>
           </div>
@@ -212,6 +232,14 @@ function App() {
             Successfully created post!
           </div>
         </div>
+      )}
+
+      {selectedPost && showEditModal && (
+        <UpdatePost
+          post={selectedPost}
+          imgSrc={selectedPost.imgSrc}
+          updatePost={(updatedPost) => updatePost(selectedPost.index, updatedPost)}
+        />
       )}
     </div>
   );

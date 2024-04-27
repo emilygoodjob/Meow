@@ -19,6 +19,7 @@
   height: auto;
   margin: auto;
   position: relative;
+  padding-bottom: 1rem;
 }
 
 .fixed-size-card .card-img-top {
