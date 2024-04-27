@@ -144,6 +144,8 @@ function App() {
 
   // Update post
   const updatePost = (index, selectedPost) => {
+    // console.log("post index: ", index, " selectedPost: ", selectedPost);
+    
     setCards(prevCards => {
       return prevCards.map((card, i) => {
         if (i === index) {
@@ -183,7 +185,7 @@ function App() {
                     onDelete={() => handleDelete(index)}
                     onUpdate={() => {
                       setSelectedPost(result);
-                      updatePost(index, selectedPost);
+                      updatePost(index, result);
                     }}
                   />
                 ))
@@ -202,7 +204,7 @@ function App() {
                       onDelete={() => handleDelete(index)}
                       onUpdate={() => {
                         setSelectedPost(card);
-                        updatePost(index, selectedPost);
+                        updatePost(index, card);
                       }}
                     />
                   );
