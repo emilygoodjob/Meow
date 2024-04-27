@@ -39,7 +39,7 @@ function App() {
     },
     {
       imgSrc: img2,
-      title: "You Are My Meow Meow",
+      title: "Cloud Meow",
       text: "Illustrator Jaznaka paints cute cats and all the sweet things in life.",
       lastUpdated: `Last updated ${new Date("2024-04-26T07:00:00").toLocaleString()}`, 
       upvotes: 559,

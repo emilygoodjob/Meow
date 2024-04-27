@@ -150,6 +150,38 @@
   display: none;
 }
 
+/* PostModal */
+.comments-container {
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
+  margin-bottom: 2rem;
+}
+
+blockquote {
+  margin-bottom: 0; /* Remove default bottom margin */
+}
+blockquote p {
+  margin-bottom: 0; /* Remove default bottom margin for paragraph inside blockquote */
+}
+.blockquote-footer {
+  font-size: 12px; /* Adjust font size of the footer */
+  font-style: italic; /* Make the footer text italic */
+}
+
+.comments-container dl {
+  margin-bottom: 0.2rem;
+}
+
+.comments-container dt {
+  font-weight: bold;
+}
+
+.comments-container dd {
+  margin-left: 0;
+}
+
 /* Texts */
 .custom-color {
   color: black !important;
@@ -164,4 +196,8 @@
 .post-text {
   margin-top: 1rem;
   margin-bottom: 3rem;
+}
+
+.text-left {
+  text-align: left;
 }
