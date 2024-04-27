@@ -113,10 +113,6 @@ function App() {
     setShowModal(true);
   };
 
-  // const handleEditClick = (card) => {
-  //   setSelectedPost(card);
-  // }
-
   const handleUpvote = (index) => {
     const updatedCards = [...cards];
     updatedCards[index].upvotes += 1;
@@ -148,7 +144,6 @@ function App() {
 
   // Update post
   const updatePost = (index, selectedPost) => {
-    console.log("updatePost function " + selectedPost);
     setCards(prevCards => {
       return prevCards.map((card, i) => {
         if (i === index) {
@@ -250,7 +245,7 @@ function App() {
                   <div className="modal-dialog modal-dialog-centered">
                       <UpdatePost
                           post={selectedPost}
-                          updatePost={() => updatePost(selectedPost.index, selectedPost)}
+                          updatePost={() => updatePost(index, selectedPost)}
                           onClose={() => setShowEditModal(false)}
                       />
                   </div>
